@@ -8,6 +8,14 @@ import com.revature.cardex.repository.CarRepository;
 // this process is called dependency injection, carServer depends on the
 //the carService, the carService depends on the carRepository, and the
 //carRepository depends on the data from the cars.csv file...
+
+/** The 3 Things we will need
+ * 1. Repository
+ * 2. Service
+ * 3. Server
+ */
+
+
 public class App {
     public static void main(String[] args) {
         /**

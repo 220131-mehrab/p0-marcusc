@@ -14,7 +14,7 @@ public class CarRepository {
     public CarRepository(String filename) {
     //constructors are for constructing the fields of an application
         this.cars = new ArrayList<>();
-        this.file = new File(filename);
+        this.file = new File("src/main/resources/"+filename);
      //add a load method to load private file method
         load();
 

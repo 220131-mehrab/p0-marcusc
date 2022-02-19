@@ -39,7 +39,9 @@ public class CarServer {
          * this folder only exists when Im using gradle in my project
          */
         /**
-         * 3.
+         * 3. a better method would to pass this.file = getClass().getClassLoader().getResourceAsStream(filename);
+         * also switch from app config to gradle run config
+         * in the carRepository so it can search for the file and load it into the html
          *
          *
          *

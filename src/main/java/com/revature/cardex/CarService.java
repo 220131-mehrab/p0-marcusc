@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 
 //don't forget to add CarService constructor
@@ -55,6 +56,10 @@ public class CarService extends HttpServlet {
     }
 
     public List<Car> getCars(){return CarRepository.getCars();}
+
+    public Car getCar(String userInput) {
+        return com.revature.cardex.repository.CarRepository.getCar(userInput.trim().toLowerCase());
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -2,8 +2,17 @@ package com.revature.cardex;
 
 
 import com.revature.cardex.repository.CarRepository;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 //making Java read the csv file
 //work backwards build from ground up
@@ -19,7 +28,7 @@ import org.apache.catalina.startup.Tomcat;
 
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LifecycleException {
         /**
          * 0. We will need a file to work with cars.csv
          */
@@ -41,24 +50,31 @@ public class App {
         //the last thing we need is the server
         //need a tomcat class
         //dont really need the carServer class since we can call on Tomcat
-        Tomcat server = new Tomcat();
-
-            server = new Tomcat();
-            //this will load in Tomcats http stuff
-            server.getConnector();
-            //leaving blank for now
-            server.addContext("", null);
-            //finally add Servlet contextPath and name it and then pass in carService and
-            //and finally .addMapping because it needs a URL.
-            server.addServlet("", "carServlet", carService).addMapping("/");
-            // also add this.server.start and surround in try catch method
-            try {
-                server.start();
-            } catch (LifecycleException e) {
-                e.printStackTrace();
+        Tomcat tomcat = new Tomcat();
+        tomcat.setPort(8080);
+        // Set context path and root folder
+        String contextPath = "/";
+        String docBase = new File(".").getAbsolutePath();
+        Context context = tomcat.addContext(contextPath, docBase);
+        // Declare, define, and map servlets
+        HttpServlet helloServlet = new HttpServlet(){
+            @Override
+            protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+                    throws ServletException, IOException {
+                PrintWriter out = resp.getWriter();
+                out.write("<html><title>Example</title><body><h1>Hello, World!</h1></body></html>");
+                out.close();
             }
-            //now I dont need the carServer class anymore so I deleted it.
-        }
+        };
+        String servletName = "HelloServlet";
+        String urlPattern = "/hello";
+        // Register servlets with Tomcat
+        Tomcat.addServlet(context, servletName, helloServlet);
+        ((Context) context).addServletMappingDecoded(urlPattern, servletName);
+        // Start the server
+        tomcat.start();
+        tomcat.getServer().await();
     }
+}
 
 

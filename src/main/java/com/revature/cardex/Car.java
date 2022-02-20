@@ -2,35 +2,35 @@ package com.revature.cardex;
 
 import java.util.Objects;
 
-public class Cars implements Comparable<Cars>{
+public class Car implements Comparable<Car>{
     private String carModel;
     private int mpg;
-    private int hp;
+    private int horsePower;
 
-    public Cars() {}
+    public Car() {}
 
-    public Cars (String carModel) {this( carModel, -1, -1); }
+    public Car(String carModel) {this( carModel, -1, -1); }
 
-    public Cars(String carModel, int mpg, int hp) {
+    public Car(String carModel, int mpg, int hp) {
         this.carModel = carModel;
         this.mpg = mpg;
-        this.hp = hp;
+        this.horsePower = hp;
     }
 
-    public static Cars of() { return new Cars(); }
+    public static Car of() { return new Car(); }
 
-    public Cars carModel() {
+    public Car carModel() {
         this.carModel = carModel;
         return this;
     }
 
-    public Cars mpg() {
+    public Car mpg() {
         this.mpg = mpg;
         return this;
     }
 
-    public Cars hp() {
-        this.hp = hp;
+    public Car hp() {
+        this.horsePower = horsePower;
         return this;
     }
 
@@ -42,15 +42,15 @@ public class Cars implements Comparable<Cars>{
         return mpg;
     }
 
-    public int getHp() {
-        return hp;
+    public int getHorsePower() {
+        return horsePower;
     }
 
     @Override
     public String toString() {
         return "Cars{" +
                 "mpg=" + mpg +
-                ", hp=" + hp + '\'' +
+                ", hp=" + horsePower + '\'' +
                 ", carModel='" + carModel + '\'' +
                 '}';
     }
@@ -59,8 +59,8 @@ public class Cars implements Comparable<Cars>{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cars cars = (Cars) o;
-        return mpg == Cars.of().mpg && Objects.equals(carModel, Cars.of().carModel()) && Objects.equals(hp, Cars.of().hp());
+        Car cars = (Car) o;
+        return mpg == Car.of().mpg && Objects.equals(carModel, Car.of().carModel()) && Objects.equals(horsePower, Car.of().hp());
     }
 
 
@@ -74,6 +74,6 @@ public class Cars implements Comparable<Cars>{
 
 
     @Override
-    public int compareTo(Cars o) {
-        return Integer.compare(this.hp, o.getHp()); }
+    public int compareTo(Car o) {
+        return Integer.compare(this.horsePower, o.getHorsePower()); }
 }

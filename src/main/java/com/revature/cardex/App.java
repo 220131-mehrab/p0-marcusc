@@ -50,7 +50,9 @@ public class App {
         CarServer server = new CarServer();
         try {
             server.start();
+            System.out.println("Server Started");
         } catch (Exception e) {
+            System.out.println(e);
 
         }
     }

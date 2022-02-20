@@ -54,6 +54,8 @@ public class CarService extends HttpServlet {
         return HTMLForm;
     }
 
+    public List<Car> getCars(){return CarRepository.getCars();}
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);

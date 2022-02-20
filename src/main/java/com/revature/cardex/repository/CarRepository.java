@@ -1,5 +1,7 @@
 package com.revature.cardex.repository;
 
+import com.revature.cardex.Car;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -9,7 +11,7 @@ import java.util.Scanner;
 
 public class CarRepository {
     //
-    private List<String> cars;
+    private List<Car> cars;
     private InputStream file; //now it will search through each file to find car.csv
     //1. create a constructor, which is just a method that has the same name of a class and returns nothing
     public CarRepository(String filename) {
@@ -29,13 +31,12 @@ public class CarRepository {
         Scanner scanner = new Scanner(this.file);
         scanner.useDelimiter("\n");
         while (scanner.hasNext()) {
-            this.cars.add(scanner.next());
+            //TODO: FIX ADDING TO LIST
+            //this.cars.add(scanner.next());
         }
     }
         //generate a getter for cars
 
 
-    public List<String> getCars() {
-        return cars;
-    }
+    public List<Car> getCars() { return cars;}
 }

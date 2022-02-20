@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 
 //don't forget to add CarService constructor
@@ -56,7 +57,7 @@ public class CarService extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
-        for (String cars : CarRepository.getCars()) {
+        for (Car cars : CarRepository.getCars()) {
             resp.getWriter().println(cars);
         }
     }

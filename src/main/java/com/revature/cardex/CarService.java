@@ -26,24 +26,39 @@ import java.io.IOException;
 
 
 
-public class CarService extends HttpServlet{
-//made private because we don't want anything accessing it directly
-    private CarRepository carRepository;
-                                    //below: this carRepository points to the one directly under it
-    public CarService(CarRepository carRepository )  {
-        //our constructor will inject this
- //while this.carRepository points to the one directly above in purple
-        this.carRepository = carRepository;
+public class CarService extends HttpServlet {
+    //made private because we don't want anything accessing it directly
+    private CarRepository CarRepository;
+
+    public CarService(CarRepository dexRepository) {
+        this.CarRepository = dexRepository;
     }
 
-    //generate override doGet method to throw servlett exception
+    public String searchForm() {
+        String HTMLForm = "<Html>\n" +
+                "<Head>\n" +
+                "    <Title>Search Cars" +
+                "</Title>\n" +
+                "</Head>\n" +
+                "<Body>\n" +
+                "    <h1>Cardex Search</h1>\n" +
+                "    <form action='cars' method='get'>\n" +
+                "        <input type='name' name='searchName'/>\n" +
+                "        <input type='submit' value='Search'/>\n" +
+                "    " +
+                "    <a href='Cars'>See Full Cardex</a>\n" +
+                "</form>\n" +
+                "</Body>\n" +
+                "</Html>";
+        return HTMLForm;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
-            for (String cars : carRepository.getCars()) {
-                resp.getWriter().println(cars);
-            }
+        for (String cars : CarRepository.getCars()) {
+            resp.getWriter().println(cars);
+        }
     }
 }
 

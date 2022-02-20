@@ -53,7 +53,6 @@ public class App {
             System.out.println("Server Started");
         } catch (Exception e) {
             System.out.println(e);
-
         }
     }
 }

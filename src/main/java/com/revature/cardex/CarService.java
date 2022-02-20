@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 
 //don't forget to add CarService constructor
@@ -28,12 +27,12 @@ import java.util.Locale;
 
 
 
-public class CarService extends HttpServlet {
+public class CarService extends HttpServlet{
     //made private because we don't want anything accessing it directly
-    private CarRepository CarRepository;
-
-    public CarService(CarRepository dexRepository) {
-        this.CarRepository = dexRepository;
+    private CarRepository carRepository;
+    //below: this carRepository points to the one directly under it
+    public CarService(CarRepository carRepository )  {
+        this.carRepository = carRepository;
     }
 
     public String searchForm() {
@@ -43,28 +42,28 @@ public class CarService extends HttpServlet {
                 "</Title>\n" +
                 "</Head>\n" +
                 "<Body>\n" +
-                "    <h1>Cardex Search</h1>\n" +
-                "    <form action='cars' method='get'>\n" +
+                "    <h1>Car Search</h1>\n" +
+                "    <form action='car' method='get'>\n" +
                 "        <input type='name' name='searchName'/>\n" +
                 "        <input type='submit' value='Search'/>\n" +
                 "    " +
-                "    <a href='Cars'>See Full Cardex</a>\n" +
+                "    <a href='pokemon'>See Full Car list</a>\n" +
                 "</form>\n" +
                 "</Body>\n" +
                 "</Html>";
         return HTMLForm;
     }
 
-    public List<Car> getCars(){return CarRepository.getCars();}
+    public List<Car> getCars(){return carRepository.getCars();}
 
-    public Car getCar(String userInput) {
-        return com.revature.cardex.repository.CarRepository.getCar(userInput.trim().toLowerCase());
+    public Car getCar(String userInput){
+        return carRepository.getCar(userInput.trim().toLowerCase());
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
-        for (Car cars : CarRepository.getCars()) {
+        for (Car cars : carRepository.getCars()) {
             resp.getWriter().println(cars);
         }
     }
